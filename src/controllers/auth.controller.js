@@ -15,7 +15,7 @@ const COOKIE_OPTIONS = {
 export const refresh = async (req, res) => {
   try {
     const refreshTokenFromCookie = req.cookies.refreshToken;
-    const tokens = await authService.refreshTokenProcess(
+    const tokens = await refreshTokenProcess(
       refreshTokenFromCookie
     );
 
@@ -48,11 +48,11 @@ export const registerController = async (req, res) => {
 export const loginController = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const { tokens, user } = await login({ email, password });
+    const { tokens } = await login({ email, password });
     res.cookie("refreshToken", tokens.refreshToken, COOKIE_OPTIONS);
     res.status(200).json({
       accessToken: tokens.accessToken,
-      user,
+
     });
   } catch (error) {
     res.status(401).json({ message: error.message });
