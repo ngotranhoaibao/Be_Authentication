@@ -68,10 +68,8 @@ export const getProfileController = async (req, res) => {
 };
 export const logoutController = async (req, res) => {
   try {
-    // Xóa refreshToken trong DB
     await logoutUser(req.user._id);
 
-    // Xóa cookie refreshToken trên browser
     res.clearCookie("refreshToken");
 
     return successResponse(res, null, "User logged out successfully", 200);

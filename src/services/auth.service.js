@@ -1,6 +1,6 @@
 import User from "../models/user.model.js";
 import { generateTokens } from "../utils/generateToken.js";
-
+import jwt from "jsonwebtoken";
 export const register = async ({ name, email, password }) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
