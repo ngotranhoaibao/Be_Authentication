@@ -8,8 +8,8 @@ import { validationResult } from "express-validator";
 import { errorResponse, successResponse } from "../utils/response.js";
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: false,
-  sameSite: "strict",
+  secure: process.env.NODE_ENV === "production", 
+  sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 export const refresh = async (req, res) => {
