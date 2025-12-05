@@ -26,7 +26,7 @@ export const login = async ({ email, password }) => {
   }
   const tokens = generateTokens(user._id);
   await User.findByIdAndUpdate(user._id, {
-    refreshTokens: tokens.refreshToken,
+    refreshToken: tokens.refreshToken,
   });
 
   return {
@@ -49,7 +49,8 @@ export const refreshTokenProcess = async (refreshTokenFromCookie) => {
     throw new Error("Refresh token không hợp lệ");
   }
 
-  const user = await User.findById(decoded.id).select("+refreshTokens");
+  const user = await User.findById(decoded.id).select("+refreshToken");
+
   if (!user || user.refreshToken !== refreshTokenFromCookie) {
     throw new Error("Refresh token không hợp lệ");
   }
@@ -71,10 +72,10 @@ export const logoutUser = async (userId) => {
 export const deleteUserProfile = async (userId) => {
   await User.findByIdAndDelete(userId);
 };
-export const updateUserProfile = async (userId, { name, email,role }) => {
+export const updateUserProfile = async (userId, { name, email, role }) => {
   const updatedUser = await User.findByIdAndUpdate(
     userId,
-    { name, email,role },
+    { name, email, role },
     { new: true }
   );
   return updatedUser;
