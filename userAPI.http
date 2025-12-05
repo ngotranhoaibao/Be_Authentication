@@ -2,7 +2,7 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-  "email": "ngotranhoaibao@gmail.com",
+  "email": "ngotranhoaibao111@gmail.com",
   "name": "hoaibao",
   "password": "123456"
 }
@@ -11,13 +11,13 @@ Post http://localhost:5000/auth/login
 Content-Type: application/json
 
 {
-  "email": "test1111111@example.com",
+  "email": "ngotranhoaibao@gmail.com",
   "password": "123456"
 }
 ###
 GET http://localhost:5000/auth/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDQ5NzQ4MSwiZXhwIjoxNzY0NDk4MzgxfQ.c3RUWh-N3Ov7hjObV69gZQXNdw6_x13siFzrU8JAIlQ
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkxNDUwNywiZXhwIjoxNzY0OTE1NDA3fQ.7BqZqMhBwNswwGdE1d3sopcSh4ODjQ2xcn7kXUtfm2A
 ###
 POST http://localhost:5000/auth/refresh-token
 Content-Type: application/json

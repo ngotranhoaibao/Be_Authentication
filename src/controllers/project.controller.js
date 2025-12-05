@@ -49,12 +49,13 @@ export const remove = async (req, res) => {
     }
 };
 export const getAll = async (req, res) => {
-  try {
-    const userId = req.user.id;
-    const userRole = req.user.role; 
-    const projects = await getMyProjects(userId, userRole); 
-    return successResponse(res, projects, 'Lấy tất cả dự án thành công', 200); 
-  } catch (err) {
-    return errorResponse(res, 500, err.message);
-  }
+    try {
+        const userId = req.user.id;
+        const userRole = req.user.role; 
+        const projects = await getMyProjects(userId, userRole); 
+        return successResponse(res, projects, 'Lấy tất cả dự án thành công', 200); 
+    } catch (err) {
+        return errorResponse(res, 500, err.message);
+    }
 };
+

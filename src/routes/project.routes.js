@@ -4,7 +4,6 @@ import { protect } from '../middlewares/auth.middleware.js';
 
 const router = express.Router();
 
-// Tất cả các API dưới đây đều yêu cầu phải đăng nhập
 router.use(protect);
 
 router.post('/', create);

@@ -8,6 +8,8 @@ export const generateTokens = (userId) => {
   const refreshToken = jwt.sign({ id: userId }, process.env.JWT_REFRESH_SECRET, {
     expiresIn: process.env.JWT_REFRESH_EXPIRE,
   });
+console.log("ACCESS EXPIRE:", `"${process.env.JWT_ACCESS_EXPIRE}"`);
+console.log("REFRESH EXPIRE:", `"${process.env.JWT_REFRESH_EXPIRE}"`);
 
   return { accessToken, refreshToken };
 };
