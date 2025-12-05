@@ -2,7 +2,7 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-  "email": "ngotranhoaibao111@gmail.com",
+  "email": "baopro498@gmail.com",
   "name": "hoaibao",
   "password": "123456"
 }
@@ -17,7 +17,7 @@ Content-Type: application/json
 ###
 GET http://localhost:5000/auth/me
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkxNDUwNywiZXhwIjoxNzY0OTE1NDA3fQ.7BqZqMhBwNswwGdE1d3sopcSh4ODjQ2xcn7kXUtfm2A
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkyNjk1NiwiZXhwIjoxNzY0OTI3ODU2fQ.ZS09vccsF6S25T-54ssr1wMzGItFvks0UzIzOjwX1wE
 ###
 POST http://localhost:5000/auth/refresh-token
 Content-Type: application/json
@@ -28,16 +28,39 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMwZTA0ZDM5Zjg2NWIyMmU1MGE4NCIsImlhdCI6MTc2NDQ5NDg1OCwiZXhwIjoxNzY0NDk1NzU4fQ.uoqMMQHEOYavuG2i0KItnJ10UiFj_DTrNBFvbCYUd5c
 
 ###
-PUT http://localhost:5000/user/profile/692c1746b4c459694a5f1d8c
+PUT http://localhost:5000/user/profile/692c18463e461a6aac646d3e
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxNzQ2YjRjNDU5Njk0YTVmMWQ4YyIsImlhdCI6MTc2NDQ5NzI4MywiZXhwIjoxNzY0NDk4MTgzfQ.m45kJeoJKXRD4wveSe3AswtHvnyzLiDzTRpS_rx59jE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkyNzAwMywiZXhwIjoxNzY0OTI3OTAzfQ.OJ1A-RD7pBgC_q6LBa3TT8cmvdhEQAgQ71UcvxB02bY
 
 {
   "name": "Updated User",
   "email": "test1111111@example.com",
   "role": "admin"
 }
+
+
+
 ###
 DELETE http://localhost:5000/user/profile/692c18463e461a6aac646d3e
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDQ5NzUxMCwiZXhwIjoxNzY0NDk4NDEwfQ.yXEtn0qUUqWc3MZFBg9uHxmkuFkjZGRc84xLu9ZXD8A
+
+###
+
+get http://localhost:5000/user/all
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkyNzAwMywiZXhwIjoxNzY0OTI3OTAzfQ.OJ1A-RD7pBgC_q6LBa3TT8cmvdhEQAgQ71UcvxB02bY
+
+###
+post http://localhost:5000/auth/refresh-token 
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4OWU5MDk4Y2I5NzU2OTM5MyIsImlhdCI6MTc2NDkzMzUyNywiZXhwIjoxNzY0OTM0NDI3fQ.fjba1BubTPFhFlmIXIcb2ihuN5wJpeuSHfGzgpiA0yk
+
+
+###
+POST http://localhost:5000/auth/forgot-password
+Content-Type: application/json
+
+{
+  "email": "baopro498@gmail.com" 
+}

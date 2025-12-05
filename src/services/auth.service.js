@@ -1,6 +1,11 @@
 import User from "../models/user.model.js";
 import { generateTokens } from "../utils/generateToken.js";
 import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+import crypto from "crypto";
+import { sendEmail } from "../utils/sendEmail.js";
+
+dotenv.config();
 export const register = async ({ name, email, password }) => {
   const userExists = await User.findOne({ email });
   if (userExists) {
@@ -79,4 +84,61 @@ export const updateUserProfile = async (userId, { name, email, role }) => {
     { new: true }
   );
   return updatedUser;
+};
+export const getAllUsersByAdmin = async () => {
+  const users = await User.find().select("-password");
+  return users;
+};
+
+export const forgotPassword = async (email) => {
+  console.log("bao: ", email);
+  const user = await User.findOne({ email });
+  console.log("user:", user);
+  if (!user) throw new Error("EMAIL_NOT_FOUND");
+
+  const resetToken = user.createPasswordResetToken();
+  await user.save({ validateBeforeSave: false });
+
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${resetToken}`;
+  const message = `
+    <div style="font-family: Arial, sans-serif; padding: 20px;">
+      <h2>Yêu cầu đặt lại mật khẩu</h2>
+      <p>Bạn nhận được email này vì chúng tôi nhận được yêu cầu đổi mật khẩu cho tài khoản của bạn.</p>
+      <a href="${resetUrl}" style="background-color: #4CAF50; color: white; padding: 10px 20px; text-decoration: none; border-radius: 5px;">Đặt lại mật khẩu</a>
+      <p>Hoặc copy link này: ${resetUrl}</p>
+      <p>Link hết hạn sau 10 phút.</p>
+    </div>
+  `;
+
+  try {
+    await sendEmail({
+      email: user.email,
+      subject: "Yêu cầu đổi mật khẩu (Password Reset)",
+      html: message,
+    });
+    return { message: "Email sent" };
+  } catch (err) {
+    user.resetPasswordToken = undefined;
+    user.resetPasswordExpire = undefined;
+    await user.save({ validateBeforeSave: false });
+    throw new Error("EMAIL_SEND_FAILED");
+  }
+};
+
+export const resetPassword = async (token, newPassword) => {
+  const hashedToken = crypto.createHash("sha256").update(token).digest("hex");
+
+  const user = await User.findOne({
+    resetPasswordToken: hashedToken,
+    resetPasswordExpire: { $gt: Date.now() },
+  });
+
+  if (!user) throw new Error("TOKEN_INVALID_OR_EXPIRED");
+
+  user.password = newPassword;
+  user.resetPasswordToken = undefined;
+  user.resetPasswordExpire = undefined;
+  await user.save();
+
+  return { message: "Password updated" };
 };

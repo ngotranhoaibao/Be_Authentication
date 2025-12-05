@@ -1,10 +1,11 @@
 POST http://localhost:5000/project
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4OWU5MDk4Y2I5NzU2OTM5MyIsImlhdCI6MTc2NDkyMDY5NSwiZXhwIjoxNzY0OTIxNTk1fQ.ALR9rI7cwar35W2j0IOh-mLrjAUHwES6zuqaTrSju2Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkyNzE3NSwiZXhwIjoxNzY0OTI4MDc1fQ.dxuecBYbfvSthzqIPCBxFOEd_0YRK7utuph83c0G9_Y
 
 {
   "title": "Dự án mới new new new",
   "description": "Mô tả dự án mới",
+  "owner": "69293e533b6ea2bc1f65be42,69293e533b6ea2bc1f65be43",
   "startDate": "2024-01-01",
   "endDate": "2024-12-31"
 }
@@ -13,7 +14,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4O
 
 GET http://localhost:5000/project
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4OWU5MDk4Y2I5NzU2OTM5MyIsImlhdCI6MTc2NDkyMDY5NSwiZXhwIjoxNzY0OTIxNTk1fQ.ALR9rI7cwar35W2j0IOh-mLrjAUHwES6zuqaTrSju2Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4OWU5MDk4Y2I5NzU2OTM5MyIsImlhdCI6MTc2NDkyODk2OCwiZXhwIjoxNzY0OTI5ODY4fQ.UkoIMDTe-vatXXGFqNK4zEWeThh4omzEj8o0K9_F6OY
 
 
 ###
@@ -30,6 +31,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4O
   "endDate": "2024-12-31"
 }
 ###
-DELETE http://localhost:5000/project/693287c7045f9bc6857d056f
+DELETE http://localhost:5000/project/69328a2c71dcdc3ab98bb183
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4OWU5MDk4Y2I5NzU2OTM5MyIsImlhdCI6MTc2NDkyMDY5NSwiZXhwIjoxNzY0OTIxNTk1fQ.ALR9rI7cwar35W2j0IOh-mLrjAUHwES6zuqaTrSju2Y
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5Mjk0ZmU4OWU5MDk4Y2I5NzU2OTM5MyIsImlhdCI6MTc2NDkyODk2OCwiZXhwIjoxNzY0OTI5ODY4fQ.UkoIMDTe-vatXXGFqNK4zEWeThh4omzEj8o0K9_F6OY
+###

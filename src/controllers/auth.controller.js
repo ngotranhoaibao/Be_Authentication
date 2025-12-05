@@ -3,21 +3,21 @@ import {
   login,
   refreshTokenProcess,
   logoutUser,
+  forgotPassword,
+  resetPassword,
 } from "../services/auth.service.js";
 import { validationResult } from "express-validator";
 import { errorResponse, successResponse } from "../utils/response.js";
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: process.env.NODE_ENV === "production", 
+  secure: process.env.NODE_ENV === "production",
   sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   maxAge: 7 * 24 * 60 * 60 * 1000,
 };
 export const refresh = async (req, res) => {
   try {
     const refreshTokenFromCookie = req.cookies.refreshToken;
-    const tokens = await refreshTokenProcess(
-      refreshTokenFromCookie
-    );
+    const tokens = await refreshTokenProcess(refreshTokenFromCookie);
 
     res.status(200).json({
       message: "Lấy token mới thành công",
@@ -52,7 +52,6 @@ export const loginController = async (req, res) => {
     res.cookie("refreshToken", tokens.refreshToken, COOKIE_OPTIONS);
     res.status(200).json({
       accessToken: tokens.accessToken,
-
     });
   } catch (error) {
     res.status(401).json({ message: error.message });
@@ -75,5 +74,28 @@ export const logoutController = async (req, res) => {
     return successResponse(res, null, "User logged out successfully", 200);
   } catch (error) {
     return errorResponse(res, 500, error.message);
+  }
+};
+
+export const forgotPasswordController = async (req, res) => {
+  try {
+    console.log("thao:", req.body.email);
+    await forgotPassword(req.body.email);
+    return successResponse(res, "Vui lòng kiểm tra email để đặt lại mật khẩu");
+  } catch (err) {
+    console.log("err:", err);
+    if (err.message === "EMAIL_NOT_FOUND") {
+      return errorResponse(res, 404, "Email không tồn tại trong hệ thống");
+    }
+    return errorResponse(res, 500, "Lỗi gửi email, vui lòng thử lại sau");
+  }
+};
+
+export const resetPasswordController = async (req, res) => {
+  try {
+    await resetPassword(req.params.token, req.body.password);
+    return successResponse(res, "Mật khẩu đã được thay đổi thành công");
+  } catch (err) {
+    return errorResponse(res, 400, "Token không hợp lệ hoặc đã hết hạn");
   }
 };

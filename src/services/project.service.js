@@ -44,3 +44,52 @@ export const getMyProjects = async (userId, userRole) => {
   // Nếu là user thường, chỉ lấy project của mình
   return await Project.find({ owner: userId });
 };
+export const getAllProjects = async (query) => {
+  // 1. XỬ LÝ PHÂN TRANG (PAGINATION)
+  const page = parseInt(query.page) || 1; // Mặc định trang 1
+  const limit = parseInt(query.limit) || 10; // Mặc định 10 dòng/trang
+  const skip = (page - 1) * limit;
+
+  // 2. XỬ LÝ SẮP XẾP (SORTING)
+  // VD: ?sort=-createdAt (Mới nhất lên đầu) hoặc ?sort=name (A-Z)
+  const sort = query.sort || '-createdAt'; // Mặc định: Mới nhất trước
+
+  // 3. XỬ LÝ LỌC & TÌM KIẾM (FILTER & SEARCH)
+  const filter = { ...query };
+  
+  // Loại bỏ các field đặc biệt không phải là dữ liệu trong DB
+  const excludeFields = ['page', 'sort', 'limit', 'fields'];
+  excludeFields.forEach((el) => delete filter[el]);
+
+  // Tìm kiếm gần đúng (Regex) cho tên dự án (Nếu có tham số name)
+  if (query.name) {
+    filter.name = { $regex: query.name, $options: 'i' }; // 'i': không phân biệt hoa thường
+  }
+
+  // 4. THỰC HIỆN TRUY VẤN
+  // .find(filter): Lọc theo điều kiện
+  // .sort(sort): Sắp xếp
+  // .skip(skip): Bỏ qua n bản ghi đầu
+  // .limit(limit): Chỉ lấy n bản ghi
+  // .populate: Lấy thông tin owner
+  const projects = await Project.find(filter)
+    .sort(sort)
+    .skip(skip)
+    .limit(limit)
+    .populate('owner', 'name email');
+
+  // 5. ĐẾM TỔNG SỐ BẢN GHI (Để Frontend biết có bao nhiêu trang)
+  const totalProjects = await Project.countDocuments(filter);
+  const totalPages = Math.ceil(totalProjects / limit);
+
+  // 6. TRẢ VỀ KẾT QUẢ KÈM METADATA
+  return {
+    projects,
+    pagination: {
+      page,
+      limit,
+      totalProjects,
+      totalPages
+    }
+  };
+};
