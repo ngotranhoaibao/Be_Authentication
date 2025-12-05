@@ -2,7 +2,42 @@ POST http://localhost:5000/auth/register
 Content-Type: application/json
 
 {
-  "email": "test2@example.com",
+  "email": "test1111111@example.com",
   "name": "Test User",
   "password": "123456"
 }
+###
+Post http://localhost:5000/auth/login
+Content-Type: application/json
+
+{
+  "email": "test1111111@example.com",
+  "password": "123456"
+}
+###
+GET http://localhost:5000/auth/me
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDQ5NzQ4MSwiZXhwIjoxNzY0NDk4MzgxfQ.c3RUWh-N3Ov7hjObV69gZQXNdw6_x13siFzrU8JAIlQ
+###
+POST http://localhost:5000/auth/refresh-token
+Content-Type: application/json
+
+###
+POST http://localhost:5000/auth/logout
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMwZTA0ZDM5Zjg2NWIyMmU1MGE4NCIsImlhdCI6MTc2NDQ5NDg1OCwiZXhwIjoxNzY0NDk1NzU4fQ.uoqMMQHEOYavuG2i0KItnJ10UiFj_DTrNBFvbCYUd5c
+
+###
+PUT http://localhost:5000/user/profile/692c1746b4c459694a5f1d8c
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxNzQ2YjRjNDU5Njk0YTVmMWQ4YyIsImlhdCI6MTc2NDQ5NzI4MywiZXhwIjoxNzY0NDk4MTgzfQ.m45kJeoJKXRD4wveSe3AswtHvnyzLiDzTRpS_rx59jE
+
+{
+  "name": "Updated User",
+  "email": "test1111111@example.com",
+  "role": "admin"
+}
+###
+DELETE http://localhost:5000/user/profile/692c18463e461a6aac646d3e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDQ5NzUxMCwiZXhwIjoxNzY0NDk4NDEwfQ.yXEtn0qUUqWc3MZFBg9uHxmkuFkjZGRc84xLu9ZXD8A

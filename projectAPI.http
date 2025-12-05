@@ -1,0 +1,30 @@
+POST http://localhost:5000/project
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkwMzg1NiwiZXhwIjoxNzY0OTA0NzU2fQ.gjBxG8z3FXhdHeSGH6RvF7tRGqW9o2t3EXxpB3Lnat0
+
+{
+  "title": "Dự án mới",
+  "description": "Mô tả dự án mới",
+  "startDate": "2024-01-01",
+  "endDate": "2024-12-31"
+}
+
+###
+
+GET http://localhost:5000/project
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkwMzg1NiwiZXhwIjoxNzY0OTA0NzU2fQ.gjBxG8z3FXhdHeSGH6RvF7tRGqW9o2t3EXxpB3Lnat0
+
+
+###
+
+PUT http://localhost:5000/project/692c18463e461a6aac646d3e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY5MmMxODQ2M2U0NjFhNmFhYzY0NmQzZSIsImlhdCI6MTc2NDkwMzg1NiwiZXhwIjoxNzY0OTA0NzU2fQ.gjBxG8z3FXhdHeSGH6RvF7tRGqW9o2t3EXxpB3Lnat0
+
+{
+  "title": "Dự án mới",
+  "description": "Mô tả dự án mới",
+  "startDate": "2024-01-01",
+  "endDate": "2024-12-31"
+}

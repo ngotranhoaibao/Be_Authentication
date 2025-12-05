@@ -13,7 +13,7 @@ export const protect = async (req, res, next) => {
     }
 
     // Giải mã token bằng JWT_SECRET để lấy payload (id user)
-    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    const decoded = jwt.verify(token, process.env.JWT_REFRESH_SECRET);
 
     // Gắn thông tin user vào req.user (bỏ password để tránh lộ)
     req.user = await User.findById(decoded.id).select("-password");
@@ -24,4 +24,17 @@ export const protect = async (req, res, next) => {
     // Token hết hạn / sai signature / corrupt
     return errorResponse(res, 401, "Token is not valid");
   }
+};
+export const authorize = (...roles) => {
+  return (req, res, next) => {
+    if (!roles.includes(req.user.role)) {
+      return errorResponse(
+        res, 
+        403, 
+        'Bạn không có quyền thực hiện hành động này', 
+        'FORBIDDEN'
+      );
+    }
+    next();
+  };
 };
