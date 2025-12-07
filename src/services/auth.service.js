@@ -91,9 +91,7 @@ export const getAllUsersByAdmin = async () => {
 };
 
 export const forgotPassword = async (email) => {
-  console.log("bao: ", email);
   const user = await User.findOne({ email });
-  console.log("user:", user);
   if (!user) throw new Error("EMAIL_NOT_FOUND");
 
   const resetToken = user.createPasswordResetToken();

@@ -79,11 +79,9 @@ export const logoutController = async (req, res) => {
 
 export const forgotPasswordController = async (req, res) => {
   try {
-    console.log("thao:", req.body.email);
     await forgotPassword(req.body.email);
     return successResponse(res, "Vui lòng kiểm tra email để đặt lại mật khẩu");
   } catch (err) {
-    console.log("err:", err);
     if (err.message === "EMAIL_NOT_FOUND") {
       return errorResponse(res, 404, "Email không tồn tại trong hệ thống");
     }
